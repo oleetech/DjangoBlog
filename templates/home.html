@@ -1,0 +1,15 @@
+
+{% extends 'base.html' %} 
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="% static 'custom.css' %">
+
+{% endblock %}
+
+{% block content %}
+<!-- এখানে কনটেন্ট পরিবর্তনের কোড থাকবে -->
+
+Hello
+<img src="{% static 'images/myimg.png' %}" alt="Image 1">
+
+{% endblock %}

@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+        {% block css %}
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+        <link rel="stylesheet" href="https://unpkg.com/@highlightjs/cdn-assets@11.7.0/styles/default.min.css" />
+        {% endblock %}
+
+        <title>{% if title %} {{title}} {% else %} Blog {% endif %}</title>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="col-md-3">
+                {% block sidebar %}
+
+
+
+                {% endblock %}
+                </div> 
+                <div class="col-md-9">
+                {% block content %}
+
+
+
+                {% endblock %}
+            </div>
+            </div>
+        </div>
+
+
+
+        {% block js %}
+        <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+        <script src="https://unpkg.com/@highlightjs/cdn-assets@11.7.0/highlight.min.js"></script>
+        <!-- and it's easy to individually load additional languages -->
+        <script src="https://unpkg.com/@highlightjs/cdn-assets@11.7.0/languages/javascript.min.js"></script>
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+              document.querySelectorAll('pre code').forEach(function(block) {
+                  hljs.highlightBlock(block);
+              });
+          });
+      </script>
+
+      <script>
+        function addCopyButtonToCodeBlock(codeBlock) {
+            // Create a button element
+            const copyButton = document.createElement('button');
+            copyButton.className = 'copy-button';
+            copyButton.textContent = 'Copy';
+            copyButton.onclick = function () {
+                copyToClipboard(codeBlock.textContent);
+            };
+    
+            // Insert the button after the code block
+            codeBlock.parentNode.insertBefore(copyButton, codeBlock.nextSibling);
+        }
+    
+        function copyToClipboard(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+    
+            // Change button text momentarily to indicate successful copy
+            const buttons = document.querySelectorAll('.copy-button');
+            buttons.forEach(function (button) {
+                if (button.textContent !== 'Copied!') {
+                    button.textContent = 'Copied!';
+                    setTimeout(function () {
+                        button.textContent = 'Copy';
+                    }, 1000);
+                }
+            });
+        }
+    
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('pre code').forEach(function (block) {
+                addCopyButtonToCodeBlock(block);
+            });
+            hljs.highlightAll();
+        });
+    </script>
+        {% endblock %}
+
+    </body>
+</html>

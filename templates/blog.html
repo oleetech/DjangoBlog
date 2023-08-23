@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Display categories as a menu -->
+<div class="category-menu">
+    <ul>
+        {% for category in categories %}
+            
+                <li><a href="{% url 'category_posts' category.name %}">{{ category.name }}</a></li>
+           
+        {% endfor %}
+    </ul>
+</div>
+</body>
+</html>

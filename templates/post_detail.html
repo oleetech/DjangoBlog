@@ -1,0 +1,24 @@
+<!-- appname/templates/post_detail.html -->
+
+{% extends 'base.html' %}
+
+{% block title %}{{ post.title }} - My Website{% endblock %}
+
+{% block sidebar %}
+
+<ul>
+    {% for related_post in related_posts %}
+        <li><a href="{% url 'post_detail' related_post.slug %}">{{ related_post.title }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}
+
+{% block content %}
+
+
+
+
+<h1>{{ post.title }}</h1>
+<p>{{ post.content|safe }}</p>
+<!-- You can display other post details here -->
+{% endblock %}
